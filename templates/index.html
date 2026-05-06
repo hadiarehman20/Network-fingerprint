@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NetPrint — Network Fingerprint Analyzer</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<!-- FIXED PATH -->
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">NetPrint</span>
+    </div>
+    <p class="tagline">Network Fingerprint Analyzer & Website Behavior Profiler</p>
+
+    <div id="modeToggle" class="mode-toggle">
+      <button class="mode-btn active" data-mode="single" onclick="setMode('single')">Single URL</button>
+      <button class="mode-btn" data-mode="compare" onclick="setMode('compare')">Compare Two URLs</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- INPUT SECTION -->
+  <section class="input-section" id="inputSection">
+    <div class="input-card">
+
+      <!-- SINGLE -->
+      <div id="singleMode" class="url-group">
+        <label class="url-label">Target Website URL</label>
+
+        <div class="url-row">
+          <input id="urlInput" class="url-input" type="text"
+                 placeholder="https://youtube.com" />
+
+          <button class="btn-analyze" onclick="runSingle()">
+            <span class="btn-icon">▶</span> Analyze
+          </button>
+        </div>
+
+        <p class="url-hint" id="urlError"></p>
+      </div>
+
+      <!-- COMPARE -->
+      <div id="compareMode" class="url-group" style="display:none">
+
+        <div class="compare-inputs">
+          <div class="compare-col">
+            <label class="url-label">Website 1</label>
+            <input id="url1Input" class="url-input" type="text"
+                   placeholder="https://youtube.com" />
+          </div>
+
+          <div class="compare-vs">VS</div>
+
+          <div class="compare-col">
+            <label class="url-label">Website 2</label>
+            <input id="url2Input" class="url-input" type="text"
+                   placeholder="https://wikipedia.org" />
+          </div>
+        </div>
+
+        <p class="url-hint" id="compareError"></p>
+
+        <button class="btn-analyze wide" onclick="runCompare()">
+          <span class="btn-icon">▶</span> Compare Both
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LOADING -->
+  <div id="loadingDiv" class="loading" style="display:none">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Capturing network traffic…</p>
+    <p class="loading-sub">This takes about 10–15 seconds</p>
+  </div>
+
+  <!-- ERROR -->
+  <div id="errorBanner" class="error-banner" style="display:none"></div>
+
+  <!-- RESULT -->
+  <section id="resultSection" style="display:none">
+
+    <div class="result-header">
+      <h2 class="result-title">Fingerprint Result</h2>
+      <div id="behaviorBadge" class="behavior-badge"></div>
+    </div>
+
+    <div class="summary-grid" id="summaryGrid"></div>
+
+    <div class="charts-row">
+
+      <div class="chart-card">
+        <h3 class="chart-title">Protocol Distribution</h3>
+        <div class="chart-wrap"><canvas id="protoChart"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <h3 class="chart-title">Packet Size Histogram</h3>
+        <div class="chart-wrap"><canvas id="histChart"></canvas></div>
+      </div>
+
+      <div class="chart-card wide-chart">
+        <h3 class="chart-title">Traffic Timeline (bytes/sec)</h3>
+        <div class="chart-wrap"><canvas id="timelineChart"></canvas></div>
+      </div>
+
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-card">
+        <h3 class="detail-title">DNS Queries Made</h3>
+        <ul id="dnsListSingle" class="detail-list"></ul>
+      </div>
+
+      <div class="detail-card">
+        <h3 class="detail-title">Unique Destination IPs</h3>
+        <ul id="ipListSingle" class="detail-list"></ul>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- COMPARE -->
+  <section id="compareResult" style="display:none">
+
+    <h2 class="result-title centered">Side-by-Side Comparison</h2>
+
+    <div class="compare-cards" id="compareCards"></div>
+
+    <div class="diff-card" id="diffCard"></div>
+
+    <div class="charts-row">
+
+      <div class="chart-card">
+        <h3 class="chart-title">Protocol Distribution — Site 1</h3>
+        <div class="chart-wrap"><canvas id="proto1Chart"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <h3 class="chart-title">Protocol Distribution — Site 2</h3>
+        <div class="chart-wrap"><canvas id="proto2Chart"></canvas></div>
+      </div>
+
+      <div class="chart-card wide-chart">
+        <h3 class="chart-title">Traffic Timeline Overlay</h3>
+        <div class="chart-wrap"><canvas id="timelineCompareChart"></canvas></div>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>NetPrint — Educational Network Fingerprinting Tool | Built with Python + Flask + Chart.js</p>
+</footer>
+
+<!-- FIXED PATH -->
+<script src="/static/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿/* ─────────────────────────────
+   GLOBAL
+───────────────────────────── */
+body {
+    margin: 0;
+    font-family: "DM Sans", sans-serif;
+    background: #0b1020;
+    color: white;
+}
+
+/* ─────────────────────────────
+   HEADER
+───────────────────────────── */
+.header {
+    background: #0f172a;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #1e293b;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.tagline {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* ─────────────────────────────
+   INPUT SECTION
+───────────────────────────── */
+.input-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.input-card {
+    background: #11172a;
+    padding: 20px;
+    border-radius: 12px;
+    width: 70%;
+}
+
+.url-input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+.btn-analyze {
+    padding: 10px 15px;
+    margin-left: 10px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ─────────────────────────────
+   CARDS
+───────────────────────────── */
+.card {
+    padding: 15px;
+    background: #11172a;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* ─────────────────────────────
+   CHARTS
+───────────────────────────── */
+canvas {
+    margin-top: 20px;
+    background: #0f172a;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* ─────────────────────────────
+   RESULT GRID
+───────────────────────────── */
+.summary-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* ─────────────────────────────
+   LOADING
+───────────────────────────── */
+.loading {
+    text-align: center;
+    margin-top: 20px;
+    color: #94a3b8;
+}
+
+/* ─────────────────────────────
+   BUTTON HOVER
+───────────────────────────── */
+.btn-analyze:hover {
+    background: #1d4ed8;
+}
